@@ -103,13 +103,18 @@ Tab1:CreateButton({
 })
 
 Tab1:CreateButton({
-    Name = '🥊 OPIUM DUEL PREMIUM',
+    Name = '💊 OPIUM DUEL PREMIUM',
     Callback = loadScript('https://pastebin.com/raw/3BQzewL3', 'OPIUM DUEL PREMIUM'),
 })
 
 Tab1:CreateButton({
     Name = '😄 Fun Hub',
     Callback = loadScript('https://raw.githubusercontent.com/UniversalScriptHub/examplefun/refs/heads/main/funhb', 'FUN HUB'),
+})
+
+Tab1:CreateButton({
+    Name = '🧠 BRAINROT SPAWNER',
+    Callback = loadScript('https://redyn.pages.dev/Other/Universel', 'BRAINROT SPAWNER'),
 })
 
 -- ==================== TAB 2: KingScript ====================
@@ -179,7 +184,7 @@ Tab3:CreateButton({
 
 Tab3:CreateButton({
     Name = '🧠 KINGSCRIPT BRAINROT SPAWNER',
-    Callback = loadScript('https://api.luarmor.net/files/v4/loaders/9ec0fb3fc4ad7abff933eb583e692214.lua', 'BRAINROT SPAWNER'),
+    Callback = loadScript('https://api.luarmor.net/files/v4/loaders/9ec0fb3fc4ad7abff933eb583e692214.lua', 'KINGSCRIPT BRAINROT SPAWNER'),
 })
 
 Tab3:CreateButton({
@@ -282,8 +287,8 @@ Tab5:CreateButton({
 Notify({
     Duration = 3,
     Title = '👑 King Loader Ready!',
-    Content = '5 tabs loaded - VOID EXTERNAL removed from Tab 1!',
+    Content = '5 tabs loaded - BRAINROT SPAWNER added to Tab 1!',
 })
 
 print("✅ King Loader Fixed - Ready to use!")
-print("📌 Script by KingLoader - VOID EXTERNAL removed")
+print("📌 Script by KingLoader - BRAINROT SPAWNER added to Tab 1")
