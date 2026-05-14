@@ -28,7 +28,7 @@ local _call16 = _call14:CreateTab('\u{26a1} Universal SAB Script', 4483362458)
 _call16:CreateSection('👑 KingScript Universal SAB Script Collection')
 
 _call16:CreateButton({
-    Name = '\u{2728} ILLUSION X KWANTAN DUEL LATEST OP',
+    Name = '♾️ VOID EXTERNAL FAKE TRADE LATEST OP',
     Callback = function(_21)
         loadstring(game:HttpGet('https://pastebin.com/raw/9kcfEdLg'))()
     end,
