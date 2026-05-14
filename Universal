@@ -91,7 +91,7 @@ local Tab1 = Window:CreateTab('⚡ Universal SAB Script', 4483362458)
 Tab1:CreateSection('👑 KingScript Universal SAB Script Collection')
 
 Tab1:CreateButton({
-    Name = '♾️ VOID EXTERNAL FAKE TRADE LATEST OP',
+    Name = '♾️(ON UPDATE🔴) VOID EXTERNAL FAKE TRADE LATEST OP',
     Callback = loadScript('https://api.luarmor.net/files/v4/loaders/cb756f66d9841fc50ae1fe6f4a3ceda9.lua', 'VOID EXTERNAL'),
 })
 
