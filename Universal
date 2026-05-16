@@ -90,7 +90,13 @@ local Tab1 = Window:CreateTab('⚡ Universal SAB Script', 4483362458)
 
 Tab1:CreateSection('👑 KingScript Universal SAB Script Collection')
 
--- VOID EXTERNAL TELAH DIHAPUS
+-- ECLIPSE DAN JIPSI TELAH DIHAPUS
+-- TINGGAL IRISH HUB DI POSISI ATAS
+
+Tab1:CreateButton({
+    Name = '🇮🇪 Irish Hub (UPDATE)',
+    Callback = loadScript('https://pastebin.com/raw/V5crY7ua', 'IRISH HUB'),
+})
 
 Tab1:CreateButton({
     Name = '⚔️ LUNIX DUELS',
@@ -287,8 +293,8 @@ Tab5:CreateButton({
 Notify({
     Duration = 3,
     Title = '👑 King Loader Ready!',
-    Content = '5 tabs loaded - BRAINROT SPAWNER added to Tab 1!',
+    Content = '5 tabs loaded - Eclipse & Jipsi removed from Tab 1!',
 })
 
 print("✅ King Loader Fixed - Ready to use!")
-print("📌 Script by KingLoader - BRAINROT SPAWNER added to Tab 1")
+print("📌 Script by KingLoader - Eclipse & Jipsi removed")
