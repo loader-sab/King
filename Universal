@@ -90,8 +90,16 @@ local Tab1 = Window:CreateTab('⚡ Universal SAB Script', 4483362458)
 
 Tab1:CreateSection('👑 KingScript Universal SAB Script Collection')
 
--- ECLIPSE DAN JIPSI TELAH DIHAPUS
--- TINGGAL IRISH HUB DI POSISI ATAS
+-- TURTLE HUB DAN JIPSI HUB DITAMBAHKAN
+Tab1:CreateButton({
+    Name = '🐢 TURTLE HUB LATEST',
+    Callback = loadScript('https://pastebin.com/raw/PrHY20JR', 'TURTLE HUB'),
+})
+
+Tab1:CreateButton({
+    Name = '☮️ JIPSI HUB (KINDA OP)',
+    Callback = loadScript('https://pastebin.com/raw/U4hzZFYZ', 'JIPSI HUB'),
+})
 
 Tab1:CreateButton({
     Name = '🇮🇪 Irish Hub (UPDATE)',
@@ -293,8 +301,8 @@ Tab5:CreateButton({
 Notify({
     Duration = 3,
     Title = '👑 King Loader Ready!',
-    Content = '5 tabs loaded - Eclipse & Jipsi removed from Tab 1!',
+    Content = '5 tabs loaded - Turtle Hub & Jipsi Hub added to Tab 1!',
 })
 
 print("✅ King Loader Fixed - Ready to use!")
-print("📌 Script by KingLoader - Eclipse & Jipsi removed")
+print("📌 Script by KingLoader - Turtle Hub & Jipsi Hub added")
