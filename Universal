@@ -90,11 +90,7 @@ local Tab1 = Window:CreateTab('⚡ Universal SAB Script', 4483362458)
 
 Tab1:CreateSection('👑 KingScript Universal SAB Script Collection')
 
-Tab1:CreateButton({
-    Name = '🦠 VIRUS HUB',
-    Callback = loadScript('https://pastebin.com/raw/WJZrNmd', 'VIRUS HUB'),
-})
-
+-- VIRUS HUB TELAH DIHAPUS
 Tab1:CreateButton({
     Name = '🐢 TURTLE HUB LATEST',
     Callback = loadScript('https://pastebin.com/raw/PrHY20JR', 'TURTLE HUB'),
@@ -300,8 +296,8 @@ Tab5:CreateButton({
 Notify({
     Duration = 3,
     Title = '👑 King Loader Ready!',
-    Content = '5 tabs loaded - Turtle Hub link updated!',
+    Content = '5 tabs loaded - Virus Hub removed from Tab 1!',
 })
 
 print("✅ King Loader Fixed - Ready to use!")
-print("📌 Script by KingLoader - Turtle Hub link changed to pastebin")
+print("📌 Script by KingLoader - Virus Hub removed")
