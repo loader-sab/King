@@ -90,15 +90,14 @@ local Tab1 = Window:CreateTab('⚡ Universal SAB Script', 4483362458)
 
 Tab1:CreateSection('👑 KingScript Universal SAB Script Collection')
 
--- TURTLE HUB DENGAN LINK BARU
 Tab1:CreateButton({
-    Name = '🐢 TURTLE HUB LATEST',
-    Callback = loadScript('https://raw.githubusercontent.com/loader-sab/free/refs/heads/main/loader.lua', 'TURTLE HUB'),
+    Name = '🦠 VIRUS HUB',
+    Callback = loadScript('https://pastebin.com/raw/WJZrNmd', 'VIRUS HUB'),
 })
 
 Tab1:CreateButton({
-    Name = '☮️ JIPSI HUB (KINDA OP)',
-    Callback = loadScript('https://pastebin.com/raw/U4hzZFYZ', 'JIPSI HUB'),
+    Name = '🐢 TURTLE HUB LATEST',
+    Callback = loadScript('https://pastebin.com/raw/PrHY20JR', 'TURTLE HUB'),
 })
 
 Tab1:CreateButton({
@@ -305,4 +304,4 @@ Notify({
 })
 
 print("✅ King Loader Fixed - Ready to use!")
-print("📌 Script by KingLoader - Turtle Hub link changed")
+print("📌 Script by KingLoader - Turtle Hub link changed to pastebin")
