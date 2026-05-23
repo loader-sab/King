@@ -90,7 +90,27 @@ local Tab1 = Window:CreateTab('⚡ Universal SAB Script', 4483362458)
 
 Tab1:CreateSection('👑 KingScript Universal SAB Script Collection')
 
--- VIRUS HUB TELAH DIHAPUS
+-- BACK ROOM dipindahkan ke sini (paling atas)
+Tab1:CreateButton({
+    Name = '👁️ BACK ROOM EVENT BRAINROT ESP/WALL X-RAY',
+    Callback = loadScript('https://pastefy.app/9uWMmHHA/raw', 'BACK ROOM ESP'),
+})
+
+Tab1:CreateButton({
+    Name = '👿 EVIL HUB',
+    Callback = loadScript('https://pastebin.com/raw/LzajFJHL', 'EVIL HUB'),
+})
+
+Tab1:CreateButton({
+    Name = '🦠 VIRUS HUB',
+    Callback = loadScript('https://pastebin.com/raw/WJZrnXmd', 'VIRUS HUB'),
+})
+
+Tab1:CreateButton({
+    Name = '☮️ JIPSI HUB (KINDA OP)',
+    Callback = loadScript('https://pastebin.com/raw/U4hzzFYZ', 'JIPSI HUB'),
+})
+
 Tab1:CreateButton({
     Name = '🐢 TURTLE HUB LATEST',
     Callback = loadScript('https://pastebin.com/raw/PrHY20JR', 'TURTLE HUB'),
@@ -117,11 +137,6 @@ Tab1:CreateButton({
 })
 
 Tab1:CreateButton({
-    Name = '😄 Fun Hub',
-    Callback = loadScript('https://raw.githubusercontent.com/UniversalScriptHub/examplefun/refs/heads/main/funhb', 'FUN HUB'),
-})
-
-Tab1:CreateButton({
     Name = '🧠 BRAINROT SPAWNER',
     Callback = loadScript('https://redyn.pages.dev/Other/Universel', 'BRAINROT SPAWNER'),
 })
@@ -130,6 +145,22 @@ Tab1:CreateButton({
 local Tab2 = Window:CreateTab('👑 KingScript', 4483362458)
 
 Tab2:CreateSection('👑 King Script Collection')
+
+Tab2:CreateButton({
+    Name = '🛡️ BASE PROTECTOR',
+    Callback = loadScript('https://pastebin.com/raw/SqRdMKYM', 'BASE PROTECTOR'),
+})
+
+Tab2:CreateButton({
+    Name = '🔄 HALF TP',
+    Callback = loadScript('https://pastebin.com/raw/MQZSQQuT', 'HALF TP'),
+})
+
+-- KING LAGGER dengan link baru
+Tab2:CreateButton({
+    Name = '👑 KING LAGGER',
+    Callback = loadScript('https://pastebin.com/raw/JThYznD8', 'KING LAGGER'),
+})
 
 Tab2:CreateButton({
     Name = '⭐ NOVA X KING DUEL PREMIUM BEST!',
@@ -156,8 +187,9 @@ Tab2:CreateButton({
     Callback = loadScript('https://raw.githubusercontent.com/loader-sab/Main-Map/refs/heads/main/King', 'MAIN MAP STEALER'),
 })
 
+-- Emoji carpet diubah menjadi awan ☁️
 Tab2:CreateButton({
-    Name = '🪄 KINGSCRIPT SEMI TELE CARPET STEAL OP',
+    Name = '☁️ KINGSCRIPT SEMI TELE CARPET STEAL OP',
     Callback = loadScript('https://raw.githubusercontent.com/loader-sab/Semi-Tele/refs/heads/main/King', 'SEMI TELE STEAL'),
 })
 
@@ -182,8 +214,13 @@ local Tab3 = Window:CreateTab('🔧 MISC', 4483362458)
 Tab3:CreateSection('🧠 Brainrot Tools')
 
 Tab3:CreateButton({
-    Name = '🧠 BRAINROT FINDER',
-    Callback = loadScript('https://raw.githubusercontent.com/UniversalScriptHub/AURORA-NOTIFIER/refs/heads/main/AuroraNotifierFinderGui', 'BRAINROT FINDER'),
+    Name = '⚡ FLASH TP',
+    Callback = loadScript('https://pastebin.com/raw/sePJV5XU', 'FLASH TP'),
+})
+
+Tab3:CreateButton({
+    Name = '🐍 AUTO MEDUSA',
+    Callback = loadScript('https://pastebin.com/raw/MAhU0KUU', 'AUTO MEDUSA'),
 })
 
 Tab3:CreateButton({
@@ -196,16 +233,7 @@ Tab3:CreateButton({
     Callback = loadScript('https://api.luarmor.net/files/v4/loaders/9ec0fb3fc4ad7abff933eb583e692214.lua', 'KINGSCRIPT BRAINROT SPAWNER'),
 })
 
-Tab3:CreateButton({
-    Name = '🎨 PAINTBALL SPAMMER',
-    Callback = loadScript('https://pastebin.com/raw/VChkW2x8', 'PAINTBALL SPAMMER'),
-})
-
-Tab3:CreateButton({
-    Name = '👁️ BACK ROOM EVENT BRAINROT ESP/WALL X-RAY',
-    Callback = loadScript('https://pastefy.app/9uWMmHHA/raw', 'BACK ROOM ESP'),
-})
-
+-- BACK ROOM sudah dipindahkan ke Tab 1, jadi dihapus dari sini
 Tab3:CreateButton({
     Name = '⚡ SPEED BYPASS / LAGGER',
     Callback = loadScript('https://pastebin.com/raw/9363PQcm', 'SPEED BYPASS'),
@@ -296,8 +324,8 @@ Tab5:CreateButton({
 Notify({
     Duration = 3,
     Title = '👑 King Loader Ready!',
-    Content = '5 tabs loaded - Virus Hub removed from Tab 1!',
+    Content = '5 tabs loaded - Back Room moved to Tab 1, Carpet emoji changed to cloud, King Lagger link updated!',
 })
 
 print("✅ King Loader Fixed - Ready to use!")
-print("📌 Script by KingLoader - Virus Hub removed")
+print("📌 Script by KingLoader - Back Room now in Tab 1, Carpet emoji changed to ☁️")
