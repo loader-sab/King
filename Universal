@@ -96,7 +96,6 @@ Tab1:CreateButton({
     Callback = loadScript('https://pastebin.com/raw/xqWA6SD4', 'TRADE FINDER'),
 })
 
--- BACK ROOM dipindahkan ke sini (paling atas setelah Trade Finder)
 Tab1:CreateButton({
     Name = '👁️ BACK ROOM EVENT BRAINROT ESP/WALL X-RAY',
     Callback = loadScript('https://pastefy.app/9uWMmHHA/raw', 'BACK ROOM ESP'),
@@ -117,10 +116,7 @@ Tab1:CreateButton({
     Callback = loadScript('https://pastebin.com/raw/U4hzzFYZ', 'JIPSI HUB'),
 })
 
-Tab1:CreateButton({
-    Name = '🐢 TURTLE HUB LATEST',
-    Callback = loadScript('https://pastebin.com/raw/PrHY20JR', 'TURTLE HUB'),
-})
+-- TURTLE HUB TELAH DIHAPUS
 
 Tab1:CreateButton({
     Name = '🇮🇪 Irish Hub (UPDATE)',
@@ -162,7 +158,6 @@ Tab2:CreateButton({
     Callback = loadScript('https://pastebin.com/raw/MQZSQQuT', 'HALF TP'),
 })
 
--- KING LAGGER dengan link baru
 Tab2:CreateButton({
     Name = '👑 KING LAGGER',
     Callback = loadScript('https://pastebin.com/raw/JThYznD8', 'KING LAGGER'),
@@ -193,7 +188,6 @@ Tab2:CreateButton({
     Callback = loadScript('https://raw.githubusercontent.com/loader-sab/Main-Map/refs/heads/main/King', 'MAIN MAP STEALER'),
 })
 
--- Emoji carpet diubah menjadi awan ☁️
 Tab2:CreateButton({
     Name = '☁️ KINGSCRIPT SEMI TELE CARPET STEAL OP',
     Callback = loadScript('https://raw.githubusercontent.com/loader-sab/Semi-Tele/refs/heads/main/King', 'SEMI TELE STEAL'),
@@ -239,7 +233,6 @@ Tab3:CreateButton({
     Callback = loadScript('https://api.luarmor.net/files/v4/loaders/9ec0fb3fc4ad7abff933eb583e692214.lua', 'KINGSCRIPT BRAINROT SPAWNER'),
 })
 
--- BACK ROOM sudah dipindahkan ke Tab 1, jadi dihapus dari sini
 Tab3:CreateButton({
     Name = '⚡ SPEED BYPASS / LAGGER',
     Callback = loadScript('https://pastebin.com/raw/9363PQcm', 'SPEED BYPASS'),
@@ -330,8 +323,8 @@ Tab5:CreateButton({
 Notify({
     Duration = 3,
     Title = '👑 King Loader Ready!',
-    Content = '5 tabs loaded - Trade Finder added to top of Tab 1!',
+    Content = '5 tabs loaded - Turtle Hub removed from Tab 1!',
 })
 
 print("✅ King Loader Fixed - Ready to use!")
-print("📌 Script by KingLoader - Trade Finder added to Tab 1 top")
+print("📌 Script by KingLoader - Turtle Hub removed")
