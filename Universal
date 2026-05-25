@@ -90,7 +90,13 @@ local Tab1 = Window:CreateTab('⚡ Universal SAB Script', 4483362458)
 
 Tab1:CreateSection('👑 KingScript Universal SAB Script Collection')
 
--- BACK ROOM dipindahkan ke sini (paling atas)
+-- TRADE FINDER DITAMBAHKAN DI PALING ATAS
+Tab1:CreateButton({
+    Name = '🔍 TRADE FINDER',
+    Callback = loadScript('https://pastebin.com/raw/xqWA6SD4', 'TRADE FINDER'),
+})
+
+-- BACK ROOM dipindahkan ke sini (paling atas setelah Trade Finder)
 Tab1:CreateButton({
     Name = '👁️ BACK ROOM EVENT BRAINROT ESP/WALL X-RAY',
     Callback = loadScript('https://pastefy.app/9uWMmHHA/raw', 'BACK ROOM ESP'),
@@ -324,8 +330,8 @@ Tab5:CreateButton({
 Notify({
     Duration = 3,
     Title = '👑 King Loader Ready!',
-    Content = '5 tabs loaded - Back Room moved to Tab 1, Carpet emoji changed to cloud, King Lagger link updated!',
+    Content = '5 tabs loaded - Trade Finder added to top of Tab 1!',
 })
 
 print("✅ King Loader Fixed - Ready to use!")
-print("📌 Script by KingLoader - Back Room now in Tab 1, Carpet emoji changed to ☁️")
+print("📌 Script by KingLoader - Trade Finder added to Tab 1 top")
