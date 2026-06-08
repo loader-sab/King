@@ -165,11 +165,7 @@ Tab2:CreateButton({
     Callback = loadScript('https://raw.githubusercontent.com/loader-sab/NOVA-X-KING/refs/heads/main/DUELS', 'NOVA X KING DUEL'),
 })
 
--- NEW KING DUEL SCRIPT dengan link baru
-Tab2:CreateButton({
-    Name = '⚔️ NEW KING DUEL SCRIPT (WORK/FIXED)',
-    Callback = loadScript('https://pastebin.com/raw/xy7YbTVq', 'NEW KING DUEL'),
-})
+-- NEW KING DUEL SCRIPT TELAH DIHAPUS
 
 Tab2:CreateButton({
     Name = '🔍 KING DUEL FINDER',
@@ -321,8 +317,8 @@ Tab5:CreateButton({
 Notify({
     Duration = 3,
     Title = '👑 King Loader Ready!',
-    Content = '5 tabs loaded - NEW KING DUEL link updated!',
+    Content = '5 tabs loaded - NEW KING DUEL SCRIPT removed from Tab 2!',
 })
 
 print("✅ King Loader Fixed - Ready to use!")
-print("📌 Script by KingLoader - NEW KING DUEL link changed to pastebin")
+print("📌 Script by KingLoader - NEW KING DUEL SCRIPT removed")
