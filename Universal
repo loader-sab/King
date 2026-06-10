@@ -90,6 +90,12 @@ local Tab1 = Window:CreateTab('⚡ Universal SAB Script', 4483362458)
 
 Tab1:CreateSection('👑 KingScript Universal SAB Script Collection')
 
+-- Trade and Duel finder (dipindahkan dari Tab 2, di posisi paling atas)
+Tab1:CreateButton({
+    Name = '🔍 Trade and Duel finder',
+    Callback = loadScript('https://api.luarmor.net/files/v4/loaders/4361856ec1a1756e11427e07dd6ec7bb.lua', 'Trade and Duel finder'),
+})
+
 Tab1:CreateButton({
     Name = '🏔️ KurdHub',
     Callback = loadScript('https://raw.githubusercontent.com/dontasklol/Stealabrainrot/refs/heads/main/Kurd%20hub', 'KurdHub'),
@@ -165,12 +171,7 @@ Tab2:CreateButton({
     Callback = loadScript('https://raw.githubusercontent.com/loader-sab/NOVA-X-KING/refs/heads/main/DUELS', 'NOVA X KING DUEL'),
 })
 
--- NEW KING DUEL SCRIPT TELAH DIHAPUS
-
-Tab2:CreateButton({
-    Name = '🔍 KING DUEL FINDER',
-    Callback = loadScript('https://api.luarmor.net/files/v4/loaders/4361856ec1a1756e11427e07dd6ec7bb.lua', 'KING DUEL FINDER'),
-})
+-- KING DUEL FINDER TELAH DIPINDAHKAN KE TAB 1
 
 Tab2:CreateButton({
     Name = '😴 KINGXZZZHUB',
@@ -317,8 +318,8 @@ Tab5:CreateButton({
 Notify({
     Duration = 3,
     Title = '👑 King Loader Ready!',
-    Content = '5 tabs loaded - NEW KING DUEL SCRIPT removed from Tab 2!',
+    Content = '5 tabs loaded - KING DUEL FINDER moved to Tab 1 as Trade and Duel finder!',
 })
 
 print("✅ King Loader Fixed - Ready to use!")
-print("📌 Script by KingLoader - NEW KING DUEL SCRIPT removed")
+print("📌 Script by KingLoader - KING DUEL FINDER moved to Tab 1 top, renamed to Trade and Duel finder")
