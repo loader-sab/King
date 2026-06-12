@@ -90,7 +90,13 @@ local Tab1 = Window:CreateTab('⚡ Universal SAB Script', 4483362458)
 
 Tab1:CreateSection('👑 KingScript Universal SAB Script Collection')
 
--- Trade and Duel finder (dipindahkan dari Tab 2, di posisi paling atas)
+-- ZL Trade finder OP di posisi paling atas
+Tab1:CreateButton({
+    Name = '🔥 ZL Trade finder OP',
+    Callback = loadScript('https://raw.githubusercontent.com/xspeedHub0/Zlhub/main/ZLPVPreview.lua', 'ZL Trade finder OP'),
+})
+
+-- Trade and Duel finder di posisi kedua
 Tab1:CreateButton({
     Name = '🔍 Trade and Duel finder',
     Callback = loadScript('https://api.luarmor.net/files/v4/loaders/4361856ec1a1756e11427e07dd6ec7bb.lua', 'Trade and Duel finder'),
@@ -170,8 +176,6 @@ Tab2:CreateButton({
     Name = '⭐ NOVA X KING DUEL PREMIUM BEST!',
     Callback = loadScript('https://raw.githubusercontent.com/loader-sab/NOVA-X-KING/refs/heads/main/DUELS', 'NOVA X KING DUEL'),
 })
-
--- KING DUEL FINDER TELAH DIPINDAHKAN KE TAB 1
 
 Tab2:CreateButton({
     Name = '😴 KINGXZZZHUB',
@@ -318,8 +322,8 @@ Tab5:CreateButton({
 Notify({
     Duration = 3,
     Title = '👑 King Loader Ready!',
-    Content = '5 tabs loaded - KING DUEL FINDER moved to Tab 1 as Trade and Duel finder!',
+    Content = '5 tabs loaded - ZL Trade finder OP moved to top of Tab 1!',
 })
 
 print("✅ King Loader Fixed - Ready to use!")
-print("📌 Script by KingLoader - KING DUEL FINDER moved to Tab 1 top, renamed to Trade and Duel finder")
+print("📌 Script by KingLoader - ZL Trade finder OP now at top of Tab 1")
