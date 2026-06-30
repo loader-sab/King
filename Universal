@@ -90,13 +90,11 @@ local Tab1 = Window:CreateTab('⚡ Universal SAB Script', 4483362458)
 
 Tab1:CreateSection('👑 KingScript Universal SAB Script Collection')
 
--- ZL Trade finder OP di posisi paling atas
 Tab1:CreateButton({
     Name = '🔥 ZL Trade finder OP',
     Callback = loadScript('https://raw.githubusercontent.com/xspeedHub0/Zlhub/main/ZLPVPreview.lua', 'ZL Trade finder OP'),
 })
 
--- Trade and Duel finder di posisi kedua
 Tab1:CreateButton({
     Name = '🔍 Trade and Duel finder',
     Callback = loadScript('https://api.luarmor.net/files/v4/loaders/4361856ec1a1756e11427e07dd6ec7bb.lua', 'Trade and Duel finder'),
@@ -156,6 +154,12 @@ Tab1:CreateButton({
 local Tab2 = Window:CreateTab('👑 KingScript', 4483362458)
 
 Tab2:CreateSection('👑 King Script Collection')
+
+-- Instan steal (paling atas)
+Tab2:CreateButton({
+    Name = '⚡ Instan steal',
+    Callback = loadScript('https://pastebin.com/raw/JWgGJcbR', 'Instan steal'),
+})
 
 Tab2:CreateButton({
     Name = '🛡️ BASE PROTECTOR',
@@ -322,8 +326,8 @@ Tab5:CreateButton({
 Notify({
     Duration = 3,
     Title = '👑 King Loader Ready!',
-    Content = '5 tabs loaded - ZL Trade finder OP moved to top of Tab 1!',
+    Content = '5 tabs loaded - Instan steal added to top of Tab 2 (KingScript)!',
 })
 
 print("✅ King Loader Fixed - Ready to use!")
-print("📌 Script by KingLoader - ZL Trade finder OP now at top of Tab 1")
+print("📌 Script by KingLoader - Instan steal added to top of Tab 2")
