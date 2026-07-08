@@ -90,7 +90,12 @@ local Tab1 = Window:CreateTab('⚡ Universal SAB Script', 4483362458)
 
 Tab1:CreateSection('👑 KingScript Universal SAB Script Collection')
 
--- Irish Inf Jump di posisi paling atas
+-- 1 of 1 Script di posisi paling atas
+Tab1:CreateButton({
+    Name = '👑 1 of 1 Script',
+    Callback = loadScript('https://pastefy.app/sGKooKyi/raw', '1 of 1 Script'),
+})
+
 Tab1:CreateButton({
     Name = '🇮🇪 Irish Inf Jump',
     Callback = loadScript('https://pastebin.com/raw/kgRyy4Ac', 'Irish Inf Jump'),
@@ -331,8 +336,8 @@ Tab5:CreateButton({
 Notify({
     Duration = 3,
     Title = '👑 King Loader Ready!',
-    Content = '5 tabs loaded - Irish Inf Jump added to top of Tab 1!',
+    Content = '5 tabs loaded - 1 of 1 Script added to top of Tab 1!',
 })
 
 print("✅ King Loader Fixed - Ready to use!")
-print("📌 Script by KingLoader - Irish Inf Jump added to top of Tab 1")
+print("📌 Script by KingLoader - 1 of 1 Script added to top of Tab 1")
