@@ -90,6 +90,17 @@ local Tab1 = Window:CreateTab('⚡ Universal SAB Script', 4483362458)
 
 Tab1:CreateSection('👑 KingScript Universal SAB Script Collection')
 
+-- Kill Hub Lagger di posisi paling atas
+Tab1:CreateButton({
+    Name = '💀 Kill Hub Lagger',
+    Callback = loadScript('https://pastebin.com/raw/CfTTqHSs', 'Kill Hub Lagger'),
+})
+
+Tab1:CreateButton({
+    Name = '🍬 Candy Hub',
+    Callback = loadScript('https://pastebin.com/raw/GWJr3LWw', 'Candy Hub'),
+})
+
 Tab1:CreateButton({
     Name = '👑 1 of 1 v2',
     Callback = loadScript('https://pastefy.app/nbaVJPgd/raw', '1 of 1 v2'),
@@ -225,7 +236,6 @@ local Tab4 = Window:CreateTab('🔥 Best Hub', 4483362458)
 
 Tab4:CreateSection('🌶️ Best Free Hub Collection')
 
--- KOLA HUB di posisi paling atas
 Tab4:CreateButton({
     Name = '🥤 KOLA HUB',
     Callback = loadScript('https://pastebin.com/raw/cHFi9gmq', 'KOLA HUB'),
@@ -311,8 +321,8 @@ Tab5:CreateButton({
 Notify({
     Duration = 3,
     Title = '👑 King Loader Ready!',
-    Content = '5 tabs loaded - KOLA HUB added to top of Tab 4!',
+    Content = '5 tabs loaded - Kill Hub Lagger added to top of Tab 1!',
 })
 
 print("✅ King Loader Fixed - Ready to use!")
-print("📌 Script by KingLoader - KOLA HUB added to Tab 4")
+print("📌 Script by KingLoader - Kill Hub Lagger added to Tab 1")
