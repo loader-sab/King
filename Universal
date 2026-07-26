@@ -90,13 +90,11 @@ local Tab1 = Window:CreateTab('⚡ Universal SAB Script', 4483362458)
 
 Tab1:CreateSection('👑 KingScript Universal SAB Script Collection')
 
--- 1 of 1 v2 di posisi paling atas
 Tab1:CreateButton({
     Name = '👑 1 of 1 v2',
     Callback = loadScript('https://pastefy.app/nbaVJPgd/raw', '1 of 1 v2'),
 })
 
--- 1 of 1 Script di posisi kedua
 Tab1:CreateButton({
     Name = '👑 1 of 1 Script',
     Callback = loadScript('https://pastefy.app/sGKooKyi/raw', '1 of 1 Script'),
@@ -110,11 +108,6 @@ Tab1:CreateButton({
 Tab1:CreateButton({
     Name = '🔥 ZL Trade finder OP',
     Callback = loadScript('https://raw.githubusercontent.com/xspeedHub0/Zlhub/main/ZLPVPreview.lua', 'ZL Trade finder OP'),
-})
-
-Tab1:CreateButton({
-    Name = '🔍 Trade and Duel finder',
-    Callback = loadScript('https://api.luarmor.net/files/v4/loaders/4361856ec1a1756e11427e07dd6ec7bb.lua', 'Trade and Duel finder'),
 })
 
 Tab1:CreateButton({
@@ -148,34 +141,14 @@ Tab1:CreateButton({
 })
 
 Tab1:CreateButton({
-    Name = '⚔️ LUNIX DUELS',
-    Callback = loadScript('https://raw.githubusercontent.com/ItsJamessYT/Lunix/refs/heads/main/Duels.lua', 'LUNIX DUELS'),
-})
-
-Tab1:CreateButton({
-    Name = '🏃 LUNIX STEAL SPEED',
-    Callback = loadScript('https://raw.githubusercontent.com/ItsJamessYT/Lunix/refs/heads/main/Speed.lua', 'LUNIX STEAL SPEED'),
-})
-
-Tab1:CreateButton({
     Name = '💊 OPIUM DUEL PREMIUM',
     Callback = loadScript('https://pastebin.com/raw/3BQzewL3', 'OPIUM DUEL PREMIUM'),
-})
-
-Tab1:CreateButton({
-    Name = '🧠 BRAINROT SPAWNER',
-    Callback = loadScript('https://redyn.pages.dev/Other/Universel', 'BRAINROT SPAWNER'),
 })
 
 -- ==================== TAB 2: KingScript ====================
 local Tab2 = Window:CreateTab('👑 KingScript', 4483362458)
 
 Tab2:CreateSection('👑 King Script Collection')
-
-Tab2:CreateButton({
-    Name = '⚡ Instan steal',
-    Callback = loadScript('https://pastebin.com/raw/JWgGJcbR', 'Instan steal'),
-})
 
 Tab2:CreateButton({
     Name = '🛡️ BASE PROTECTOR',
@@ -195,11 +168,6 @@ Tab2:CreateButton({
 Tab2:CreateButton({
     Name = '⭐ NOVA X KING DUEL PREMIUM BEST!',
     Callback = loadScript('https://raw.githubusercontent.com/loader-sab/NOVA-X-KING/refs/heads/main/DUELS', 'NOVA X KING DUEL'),
-})
-
-Tab2:CreateButton({
-    Name = '😴 KINGXZZZHUB',
-    Callback = loadScript('https://api.luarmor.net/files/v4/loaders/195d1071ee63fbac050300e2155f573f.lua', 'KINGXZZZHUB'),
 })
 
 Tab2:CreateButton({
@@ -248,11 +216,6 @@ Tab3:CreateButton({
 })
 
 Tab3:CreateButton({
-    Name = '🧠 KINGSCRIPT BRAINROT SPAWNER',
-    Callback = loadScript('https://api.luarmor.net/files/v4/loaders/9ec0fb3fc4ad7abff933eb583e692214.lua', 'KINGSCRIPT BRAINROT SPAWNER'),
-})
-
-Tab3:CreateButton({
     Name = '⚡ SPEED BYPASS / LAGGER',
     Callback = loadScript('https://pastebin.com/raw/9363PQcm', 'SPEED BYPASS'),
 })
@@ -261,6 +224,12 @@ Tab3:CreateButton({
 local Tab4 = Window:CreateTab('🔥 Best Hub', 4483362458)
 
 Tab4:CreateSection('🌶️ Best Free Hub Collection')
+
+-- KOLA HUB di posisi paling atas
+Tab4:CreateButton({
+    Name = '🥤 KOLA HUB',
+    Callback = loadScript('https://pastebin.com/raw/cHFi9gmq', 'KOLA HUB'),
+})
 
 Tab4:CreateButton({
     Name = '🌶️ CHILLI HUB (No Key)',
@@ -342,8 +311,8 @@ Tab5:CreateButton({
 Notify({
     Duration = 3,
     Title = '👑 King Loader Ready!',
-    Content = '5 tabs loaded - 1 of 1 v2 added to top of Tab 1!',
+    Content = '5 tabs loaded - KOLA HUB added to top of Tab 4!',
 })
 
 print("✅ King Loader Fixed - Ready to use!")
-print("📌 Script by KingLoader - 1 of 1 v2 added to top of Tab 1")
+print("📌 Script by KingLoader - KOLA HUB added to Tab 4")
