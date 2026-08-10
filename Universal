@@ -1,328 +1,266 @@
--- King Loader Special SAB Loader - Fixed Edition (Discord Tab Added)
--- All features preserved, callback errors fixed
+-- 1. Load Fluent Library & Addons
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
-local Players = game:GetService("Players")
-local lp = Players.LocalPlayer
-local genv = getgenv()
+-- 2. Create Main Window
+local Window = Fluent:CreateWindow({
+    Title = "SAB KING LOADER V2 NEW",
+    SubTitle = "by SAB KING Team",
+    TabWidth = 150,
+    Size = UDim2.fromOffset(540, 380),
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl
+})
 
--- Load Rayfield dengan multiple fallback URLs (fix infinite yield)
-local Rayfield = nil
-local RayfieldLoaded = false
-
-local RayfieldURLs = {
-    'https://raw.githubusercontent.com/shlexware/Rayfield/main/source.lua',
-    'https://sirius.menu/rayfield',
-    'https://pastebin.com/raw/rayfield_latest',
+-- 3. Create Tabs
+local Tabs = {
+    SAB = Window:AddTab({ Title = "BEST KING SAB", Icon = "flame" }),
+    Duel = Window:AddTab({ Title = "BEST DUEL", Icon = "swords" }),
+    Misc = Window:AddTab({ Title = "MISC", Icon = "box" }),
+    Settings = Window:AddTab({ Title = "Settings & Community", Icon = "settings" })
 }
 
-for _, url in ipairs(RayfieldURLs) do
-    local success, result = pcall(function()
-        return loadstring(game:HttpGet(url))()
-    end)
-    if success and result then
-        Rayfield = result
-        RayfieldLoaded = true
-        break
+----------------------------------------------------------------------
+-- MOBILE FLOATING TOGGLE BUTTON (LOGO "K")
+----------------------------------------------------------------------
+local ScreenGui = Instance.new("ScreenGui")
+local ToggleButton = Instance.new("TextButton")
+local UICorner = Instance.new("UICorner")
+
+ScreenGui.Name = "SABKingToggleGui"
+ScreenGui.Parent = (game:GetService("CoreGui"):FindFirstChild("RobloxGui") or game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
+ScreenGui.ResetOnSpawn = false
+
+ToggleButton.Name = "ToggleButton"
+ToggleButton.Parent = ScreenGui
+ToggleButton.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
+ToggleButton.Position = UDim2.new(0.05, 0, 0.2, 0)
+ToggleButton.Size = UDim2.new(0, 50, 0, 50)
+ToggleButton.Font = Enum.Font.SourceSansBold
+ToggleButton.Text = "K"
+ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToggleButton.TextSize = 28
+ToggleButton.Active = true
+ToggleButton.Draggable = true
+
+UICorner.CornerRadius = UDim.new(0.5, 0)
+UICorner.Parent = ToggleButton
+
+-- Toggle UI visibility when clicking the "K" button
+ToggleButton.MouseButton1Click:Connect(function()
+    if Window then
+        Window:Minimize()
     end
+end)
+
+----------------------------------------------------------------------
+-- TAB 1: BEST KING SAB SCRIPT
+----------------------------------------------------------------------
+Tabs.SAB:AddSection("Script List")
+
+local SAB_Scripts = {
+    ["Auto RNG machine beta"] = "https://pastebin.com/raw/vjAwx1jd",
+    ["Chilin Auto Joiner"] = "https://pastebin.com/raw/Qv19kXGt",
+    ["Best ALL hub"] = "https://pastebin.com/raw/90A03L8y",
+    ["Gamma Auto Gift Code"] = "https://pastebin.com/raw/6DJnLV4H",
+    ["Gift Code Snipe v1"] = "https://pastebin.com/raw/h15sLLSX",
+    ["NEW Auto code Redemer"] = "https://pastebin.com/raw/h6v8HZaj",
+    ["Gift Code Snipe v2"] = "https://pastebin.com/raw/2NzxTMZU",
+    ["Amir hub Gift Code Snipe"] = "https://pastebin.com/raw/Am0pxziv",
+    ["Anti Admin Panel"] = "https://pastebin.com/raw/kwucBwdW",
+    ["FPS Booster"] = "https://pastebin.com/raw/Ng8mCw8A",
+    ["Anti Bat"] = "https://pastebin.com/raw/a7zM4eAC",
+    ["Fast Kick Rejoin"] = "https://pastebin.com/raw/xnPAfz2M",
+    ["Worked Anti Ragdoll v1"] = "https://pastebin.com/raw/0bKbxNMv",
+    ["Anti Die"] = "https://pastebin.com/raw/ZpNE636e",
+    ["Auto Carry Speed"] = "https://pastebin.com/raw/EV3JZHtZ",
+    ["Empty Map Finder"] = "https://pastebin.com/raw/1CeeY67A",
+    ["Irish Hub V1.1"] = "https://pastebin.com/raw/HW6U98FR",
+    ["Galaxy Ping Lagger"] = "https://pastebin.com/raw/crG7QHYF",
+    ["ViolanceHub.CC"] = "https://pastebin.com/raw/c3U9pqfn",
+    ["Auto Buy Carpet"] = "https://pastebin.com/raw/1vMhQL0U",
+    ["Auto Grab V1"] = "https://pastebin.com/raw/Ncrn0NWs",
+    ["Auto Steal + zeus gear"] = "https://pastebin.com/raw/Vt4QzvSX",
+    ["Kanye Flash TP"] = "https://pastebin.com/raw/aG1ZZJau",
+    ["FlashTP ice hub"] = "https://pastebin.com/raw/40vnSnnV",
+    ["Nova FlashTP"] = "https://pastebin.com/raw/VmJEpDz1",
+    ["Insta Reset"] = "https://pastebin.com/raw/tkUY2HJm",
+    ["404 Auto Grab"] = "https://pastebin.com/raw/b6sir6sE"
+}
+
+local SAB_List = {}
+for name, _ in pairs(SAB_Scripts) do
+    table.insert(SAB_List, name)
 end
+table.sort(SAB_List)
 
-if not RayfieldLoaded then
-    game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "King Loader Error",
-        Text = "Failed to load UI! Check your connection.",
-        Duration = 5
-    })
-    return
-end
+local SelectedSAB = SAB_List[1]
 
-local Notify = Rayfield.Notify
+local SABDropdown = Tabs.SAB:AddDropdown("SABSelector", {
+    Title = "Select SAB Script",
+    Values = SAB_List,
+    Multi = false,
+    Default = 1,
+})
 
--- Safe callback wrapper (FIXES callback error!)
-local function safeCallback(func)
-    return function(...)
-        local success, err = pcall(func, ...)
-        if not success then
-            Notify({
-                Title = "⚠️ Script Error",
-                Content = "Failed to load: " .. tostring(err):sub(1, 50),
+SABDropdown:OnChanged(function(Value)
+    SelectedSAB = Value
+end)
+
+Tabs.SAB:AddButton({
+    Title = "Execute Selected SAB Script",
+    Description = "Run the chosen SAB script from the dropdown above",
+    Callback = function()
+        if SAB_Scripts[SelectedSAB] then
+            Fluent:Notify({
+                Title = "SAB Loader",
+                Content = "Executing: " .. SelectedSAB,
                 Duration = 3
             })
-            warn("[KingLoader] Callback error: ", err)
+            task.spawn(function()
+                loadstring(game:HttpGet(SAB_Scripts[SelectedSAB]))()
+            end)
         end
     end
-end
+})
 
--- Safe loader function
-local function loadScript(url, name)
-    return safeCallback(function()
-        local success, err = pcall(function()
-            loadstring(game:HttpGet(url))()
+----------------------------------------------------------------------
+-- TAB 2: BEST DUEL SCRIPT
+----------------------------------------------------------------------
+Tabs.Duel:AddSection("Script List")
+
+local Duel_Scripts = {
+    ["Larph Duel"] = "https://pastebin.com/raw/138HBiRK",
+    ["Cryon Duel"] = "https://pastebin.com/raw/tZZk3wS7",
+    ["Nail Hub Duel"] = "https://pastebin.com/raw/pMG73qbd",
+    ["Five Duel"] = "https://pastebin.com/raw/cU3A8ERS",
+    ["Crux Duel v3"] = "https://pastebin.com/raw/prDEZHJh",
+    ["Crux Duel for Mobile"] = "https://pastebin.com/raw/nYuNj0MJ",
+    ["Moon Duel"] = "https://pastebin.com/raw/pM6aVJHJ",
+    ["OR.s Duel"] = "https://pastebin.com/raw/wgqE3MiN"
+}
+
+local Duel_List = {}
+for name, _ in pairs(Duel_Scripts) do
+    table.insert(Duel_List, name)
+end
+table.sort(Duel_List)
+
+local SelectedDuel = Duel_List[1]
+
+local DuelDropdown = Tabs.Duel:AddDropdown("DuelSelector", {
+    Title = "Select Duel Script",
+    Values = Duel_List,
+    Multi = false,
+    Default = 1,
+})
+
+DuelDropdown:OnChanged(function(Value)
+    SelectedDuel = Value
+end)
+
+Tabs.Duel:AddButton({
+    Title = "Execute Selected Duel Script",
+    Description = "Run the chosen Duel script from the dropdown above",
+    Callback = function()
+        if Duel_Scripts[SelectedDuel] then
+            Fluent:Notify({
+                Title = "Duel Loader",
+                Content = "Executing: " .. SelectedDuel,
+                Duration = 3
+            })
+            task.spawn(function()
+                loadstring(game:HttpGet(Duel_Scripts[SelectedDuel]))()
+            end)
+        end
+    end
+})
+
+----------------------------------------------------------------------
+-- TAB 3: MISC SCRIPT
+----------------------------------------------------------------------
+Tabs.Misc:AddSection("Script List")
+
+Tabs.Misc:AddButton({
+    Title = "1. Best UGC Emote + Animation",
+    Description = "Execute Emote & Animation GUI",
+    Callback = function()
+        Fluent:Notify({
+            Title = "Misc Loader",
+            Content = "Executing Emotes Script...",
+            Duration = 3
+        })
+        task.spawn(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/7yd7/Hub/refs/heads/Branch/GUIS/Emotes.lua"))()
         end)
-        if success then
-            Notify({
-                Title = "✅ Loaded",
-                Content = name .. " loaded successfully!",
-                Duration = 2
+    end
+})
+
+Tabs.Misc:AddButton({
+    Title = "2. M7 ADMIN Script",
+    Description = "Execute M7 Admin Loader",
+    Callback = function()
+        Fluent:Notify({
+            Title = "Misc Loader",
+            Content = "Executing M7 Admin...",
+            Duration = 3
+        })
+        task.spawn(function()
+            loadstring(game:HttpGet("https://mois7.xyz/loader"))()
+        end)
+    end
+})
+
+----------------------------------------------------------------------
+-- TAB 4: SETTINGS & COMMUNITY DISCORD
+----------------------------------------------------------------------
+local DiscordLink = "https://discord.gg/s7k44ZYuys"
+
+Tabs.Settings:AddSection("Community")
+
+Tabs.Settings:AddParagraph({
+    Title = "Join Our Community!",
+    Content = "Join our Discord server for more scripts, updates, and support:\n" .. DiscordLink
+})
+
+Tabs.Settings:AddButton({
+    Title = "Copy Discord Invite Link",
+    Description = "Click to copy the Discord link to your clipboard",
+    Callback = function()
+        if setclipboard then
+            setclipboard(DiscordLink)
+            Fluent:Notify({
+                Title = "Discord Link",
+                Content = "Discord invite link copied to clipboard!",
+                Duration = 3
             })
         else
-            Notify({
-                Title = "❌ Error",
-                Content = "Failed to load " .. name,
+            Fluent:Notify({
+                Title = "Error",
+                Content = "Your executor does not support clipboard copying.",
                 Duration = 3
             })
         end
-    end)
-end
-
-genv.RayfieldDebug = false
-
--- Create Window
-local Window = Rayfield:CreateWindow({
-    LoadingTitle = 'Loading King Loader...',
-    Name = '👑 King Loader Special SAB Loader 🧠',
-    KeySystem = false,
-    LoadingSubtitle = 'All scripts ready in one window',
-    ConfigurationSaving = {Enabled = false},
+    end
 })
 
--- ==================== TAB 1: Universal SAB Script ====================
-local Tab1 = Window:CreateTab('⚡ Universal SAB Script', 4483362458)
+-- UI Library Config & Settings Manager
+SaveManager:SetLibrary(Fluent)
+InterfaceManager:SetLibrary(Fluent)
+SaveManager:IgnoreThemeSettings()
+SaveManager:SetIgnoreIndexes({})
 
-Tab1:CreateSection('👑 KingScript Universal SAB Script Collection')
+InterfaceManager:BuildInterfaceSection(Tabs.Settings)
+SaveManager:BuildConfigSection(Tabs.Settings)
 
--- Kill Hub Lagger di posisi paling atas
-Tab1:CreateButton({
-    Name = '💀 Kill Hub Lagger',
-    Callback = loadScript('https://pastebin.com/raw/CfTTqHSs', 'Kill Hub Lagger'),
+Window:SelectTab(1)
+
+-- Welcome Notification
+Fluent:Notify({
+    Title = "SAB KING LOADER V2 NEW",
+    Content = "Loader loaded successfully! Click the 'K' button to open/close menu.",
+    Duration = 5
 })
 
-Tab1:CreateButton({
-    Name = '🍬 Candy Hub',
-    Callback = loadScript('https://pastebin.com/raw/GWJr3LWw', 'Candy Hub'),
-})
-
-Tab1:CreateButton({
-    Name = '👑 1 of 1 v2',
-    Callback = loadScript('https://pastefy.app/nbaVJPgd/raw', '1 of 1 v2'),
-})
-
-Tab1:CreateButton({
-    Name = '👑 1 of 1 Script',
-    Callback = loadScript('https://pastefy.app/sGKooKyi/raw', '1 of 1 Script'),
-})
-
-Tab1:CreateButton({
-    Name = '🇮🇪 Irish Inf Jump',
-    Callback = loadScript('https://pastebin.com/raw/kgRyy4Ac', 'Irish Inf Jump'),
-})
-
-Tab1:CreateButton({
-    Name = '🔥 ZL Trade finder OP',
-    Callback = loadScript('https://raw.githubusercontent.com/xspeedHub0/Zlhub/main/ZLPVPreview.lua', 'ZL Trade finder OP'),
-})
-
-Tab1:CreateButton({
-    Name = '🏔️ KurdHub',
-    Callback = loadScript('https://raw.githubusercontent.com/dontasklol/Stealabrainrot/refs/heads/main/Kurd%20hub', 'KurdHub'),
-})
-
-Tab1:CreateButton({
-    Name = '👁️ BACK ROOM EVENT BRAINROT ESP/WALL X-RAY',
-    Callback = loadScript('https://pastefy.app/9uWMmHHA/raw', 'BACK ROOM ESP'),
-})
-
-Tab1:CreateButton({
-    Name = '👿 EVIL HUB',
-    Callback = loadScript('https://pastebin.com/raw/LzajFJHL', 'EVIL HUB'),
-})
-
-Tab1:CreateButton({
-    Name = '🦠 VIRUS HUB',
-    Callback = loadScript('https://pastebin.com/raw/WJZrnXmd', 'VIRUS HUB'),
-})
-
-Tab1:CreateButton({
-    Name = '☮️ JIPSI HUB (KINDA OP)',
-    Callback = loadScript('https://pastebin.com/raw/U4hzzFYZ', 'JIPSI HUB'),
-})
-
-Tab1:CreateButton({
-    Name = '🇮🇪 Irish Hub (UPDATE)',
-    Callback = loadScript('https://pastebin.com/raw/V5crY7ua', 'IRISH HUB'),
-})
-
-Tab1:CreateButton({
-    Name = '💊 OPIUM DUEL PREMIUM',
-    Callback = loadScript('https://pastebin.com/raw/3BQzewL3', 'OPIUM DUEL PREMIUM'),
-})
-
--- ==================== TAB 2: KingScript ====================
-local Tab2 = Window:CreateTab('👑 KingScript', 4483362458)
-
-Tab2:CreateSection('👑 King Script Collection')
-
-Tab2:CreateButton({
-    Name = '🛡️ BASE PROTECTOR',
-    Callback = loadScript('https://pastebin.com/raw/SqRdMKYM', 'BASE PROTECTOR'),
-})
-
-Tab2:CreateButton({
-    Name = '🔄 HALF TP',
-    Callback = loadScript('https://pastebin.com/raw/MQZSQQuT', 'HALF TP'),
-})
-
-Tab2:CreateButton({
-    Name = '👑 KING LAGGER',
-    Callback = loadScript('https://pastebin.com/raw/JThYznD8', 'KING LAGGER'),
-})
-
-Tab2:CreateButton({
-    Name = '⭐ NOVA X KING DUEL PREMIUM BEST!',
-    Callback = loadScript('https://raw.githubusercontent.com/loader-sab/NOVA-X-KING/refs/heads/main/DUELS', 'NOVA X KING DUEL'),
-})
-
-Tab2:CreateButton({
-    Name = '🗺️ KINGSCRIPT MAIN MAP STEALER HELPER',
-    Callback = loadScript('https://raw.githubusercontent.com/loader-sab/Main-Map/refs/heads/main/King', 'MAIN MAP STEALER'),
-})
-
-Tab2:CreateButton({
-    Name = '☁️ KINGSCRIPT SEMI TELE CARPET STEAL OP',
-    Callback = loadScript('https://raw.githubusercontent.com/loader-sab/Semi-Tele/refs/heads/main/King', 'SEMI TELE STEAL'),
-})
-
-Tab2:CreateButton({
-    Name = '👿 EVIL HUB DUEL',
-    Callback = loadScript('https://pastebin.com/raw/LzajFJHL', 'EVIL HUB DUEL'),
-})
-
-Tab2:CreateButton({
-    Name = '👑 KING ADMIN SPAMMER',
-    Callback = loadScript('https://raw.githubusercontent.com/loader-sab/Admin-Spammer/refs/heads/main/King', 'KING ADMIN SPAMMER'),
-})
-
-Tab2:CreateParagraph({
-    Title = '⚠️ ADMIN SPAMMER WARNING',
-    Content = 'This script requires Server Owner or Private Server Owner privileges to work!\nUse only on servers you own.',
-})
-
--- ==================== TAB 3: MISC ====================
-local Tab3 = Window:CreateTab('🔧 MISC', 4483362458)
-
-Tab3:CreateSection('🧠 Brainrot Tools')
-
-Tab3:CreateButton({
-    Name = '⚡ FLASH TP',
-    Callback = loadScript('https://pastebin.com/raw/sePJV5XU', 'FLASH TP'),
-})
-
-Tab3:CreateButton({
-    Name = '🐍 AUTO MEDUSA',
-    Callback = loadScript('https://pastebin.com/raw/MAhU0KUU', 'AUTO MEDUSA'),
-})
-
-Tab3:CreateButton({
-    Name = '💃 EMOTE / TAUNT',
-    Callback = loadScript('https://raw.githubusercontent.com/7yd7/Hub/refs/heads/Branch/GUIS/Emotes.lua', 'EMOTE / TAUNT'),
-})
-
-Tab3:CreateButton({
-    Name = '⚡ SPEED BYPASS / LAGGER',
-    Callback = loadScript('https://pastebin.com/raw/9363PQcm', 'SPEED BYPASS'),
-})
-
--- ==================== TAB 4: Best Hub ====================
-local Tab4 = Window:CreateTab('🔥 Best Hub', 4483362458)
-
-Tab4:CreateSection('🌶️ Best Free Hub Collection')
-
-Tab4:CreateButton({
-    Name = '🥤 KOLA HUB',
-    Callback = loadScript('https://pastebin.com/raw/cHFi9gmq', 'KOLA HUB'),
-})
-
-Tab4:CreateButton({
-    Name = '🌶️ CHILLI HUB (No Key)',
-    Callback = loadScript('https://raw.githubusercontent.com/tienkhanh1/spicy/main/Chilli.lua', 'CHILLI HUB'),
-})
-
-Tab4:CreateParagraph({
-    Title = '📌 Chilli Hub Info',
-    Content = '✅ Complete features\n✅ No Key required\n✅ Free to use',
-})
-
-Tab4:CreateButton({
-    Name = '🌙 NOON HUB',
-    Callback = loadScript('https://pastebin.com/raw/G326ueQu', 'NOON HUB'),
-})
-
-Tab4:CreateParagraph({
-    Title = '📌 Noon Hub Info',
-    Content = '✅ Collection of various scripts\n✅ Free version\n✅ Universal SAB',
-})
-
-Tab4:CreateButton({
-    Name = '🟢 NATE HUB',
-    Callback = loadScript('https://pastebin.com/raw/r8CADsGC', 'NATE HUB'),
-})
-
-Tab4:CreateParagraph({
-    Title = '📌 Nate Hub Info',
-    Content = '✅ Latest hub script\n✅ Free to use\n✅ Regular updates',
-})
-
-Tab4:CreateButton({
-    Name = '💚 ENVY HUB',
-    Callback = loadScript('https://pastebin.com/raw/tuvc3xjd', 'ENVY HUB'),
-})
-
-Tab4:CreateParagraph({
-    Title = '📌 Envy Hub Info',
-    Content = '✅ Premium features\n✅ Free access\n✅ Regular updates',
-})
-
--- ==================== TAB 5: Discord ====================
-local Tab5 = Window:CreateTab('💬 Discord', 4483362458)
-
-Tab5:CreateSection('💬 Join Our Community')
-
-Tab5:CreateButton({
-    Name = '💬 JOIN KINGHUB DISCORD',
-    Callback = safeCallback(function()
-        setclipboard('https://discord.gg/ehfk7SdSTk')
-        Notify({
-            Duration = 3,
-            Title = '💬 Discord Invite',
-            Content = 'Link copied to clipboard! Join KingHub now!',
-        })
-    end),
-})
-
-Tab5:CreateParagraph({
-    Title = '📌 Discord Info',
-    Content = 'Click the button above to copy the Discord invite link.\nJoin KingHub for updates, support, and more scripts!',
-})
-
-Tab5:CreateSection('👑 King Loader Info')
-
-Tab5:CreateButton({
-    Name = '💬 JOIN OUR DISCORD',
-    Callback = safeCallback(function()
-        setclipboard('https://discord.gg/ehfk7SdSTk')
-        Notify({
-            Duration = 3,
-            Title = '💬 Discord Invite',
-            Content = 'Link copied to clipboard! Join KingHub now!',
-        })
-    end),
-})
-
--- Final notification
-Notify({
-    Duration = 3,
-    Title = '👑 King Loader Ready!',
-    Content = '5 tabs loaded - Kill Hub Lagger added to top of Tab 1!',
-})
-
-print("✅ King Loader Fixed - Ready to use!")
-print("📌 Script by KingLoader - Kill Hub Lagger added to Tab 1")
+SaveManager:LoadAutoloadConfig()
