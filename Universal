@@ -215,7 +215,7 @@ Tabs.Misc:AddButton({
 ----------------------------------------------------------------------
 -- TAB 4: SETTINGS & COMMUNITY DISCORD
 ----------------------------------------------------------------------
-local DiscordLink = "https://discord.gg/s7k44ZYuys"
+local DiscordLink = "https://discord.gg/ehfk7SdSTk"
 
 Tabs.Settings:AddSection("Community")
 
