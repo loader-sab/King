@@ -1,24 +1,439 @@
--- 1. Load Fluent Library & Addons
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+-- 1. Load Fluent Library & Addons with Fallback
+local Fluent, SaveManager, InterfaceManager
 
--- 2. Create Main Window
+local FluentURLs = {
+    "https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua",
+    "https://raw.githubusercontent.com/dawid-scripts/Fluent/main/main.lua",
+    "https://pastebin.com/raw/FluentLibrary"
+}
+
+for _, url in ipairs(FluentURLs) do
+    local success, result = pcall(function()
+        return loadstring(game:HttpGet(url))()
+    end)
+    if success and result then
+        Fluent = result
+        break
+    end
+end
+
+if not Fluent then
+    local success, result = pcall(function()
+        return loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/main/main.lua"))()
+    end)
+    if success and result then
+        Fluent = result
+    end
+end
+
+if Fluent then
+    local success2, result2 = pcall(function()
+        return loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+    end)
+    if success2 then SaveManager = result2 end
+    
+    local success3, result3 = pcall(function()
+        return loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+    end)
+    if success3 then InterfaceManager = result3 end
+end
+
+----------------------------------------------------------------------
+-- PRE-LOADER / LOADING SCREEN - PREMIUM EDITION
+----------------------------------------------------------------------
+local CoreGui = game:GetService("CoreGui")
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local player = Players.LocalPlayer
+
+-- Warna Premium
+local GoldColor = Color3.fromRGB(255, 215, 0)
+local GoldDark = Color3.fromRGB(200, 170, 0)
+local GoldLight = Color3.fromRGB(255, 235, 150)
+local DarkBg = Color3.fromRGB(12, 12, 18)
+local DarkCard = Color3.fromRGB(20, 20, 30)
+
+local LoadingGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local UIGradient = Instance.new("UIGradient")
+local TitleLabel = Instance.new("TextLabel")
+local SubTitleLabel = Instance.new("TextLabel")
+local StatusLabel = Instance.new("TextLabel")
+local BarBackground = Instance.new("Frame")
+local BarBackgroundCorner = Instance.new("UICorner")
+local ProgressBar = Instance.new("Frame")
+local ProgressBarCorner = Instance.new("UICorner")
+local ProgressGlow = Instance.new("Frame")
+local PercentageLabel = Instance.new("TextLabel")
+local LoadingIcon = Instance.new("TextLabel")
+
+LoadingGui.Name = "SABKingPreloader"
+LoadingGui.Parent = (CoreGui:FindFirstChild("RobloxGui") or player:WaitForChild("PlayerGui"))
+LoadingGui.ResetOnSpawn = false
+
+-- Main Frame
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = LoadingGui
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.BackgroundColor3 = DarkBg
+MainFrame.BackgroundTransparency = 0.05
+MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+MainFrame.Size = UDim2.new(0, 400, 0, 220)
+
+UICorner.CornerRadius = UDim.new(0, 16)
+UICorner.Parent = MainFrame
+
+-- Border Glow
+local BorderStroke = Instance.new("UIStroke")
+BorderStroke.Color = GoldColor
+BorderStroke.Thickness = 2
+BorderStroke.Transparency = 0.3
+BorderStroke.Parent = MainFrame
+
+local BorderGradient = Instance.new("UIGradient")
+BorderGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, GoldColor),
+    ColorSequenceKeypoint.new(0.5, GoldLight),
+    ColorSequenceKeypoint.new(1, GoldColor)
+})
+BorderGradient.Parent = BorderStroke
+
+-- Background Gradient
+local BgGradient = Instance.new("UIGradient")
+BgGradient.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(15, 15, 25)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(25, 20, 35)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(15, 15, 25))
+})
+BgGradient.Rotation = 45
+BgGradient.Parent = MainFrame
+
+-- Loading Icon (Spinning Crown)
+LoadingIcon.Parent = MainFrame
+LoadingIcon.BackgroundTransparency = 1
+LoadingIcon.Position = UDim2.new(0.5, -25, 0, 20)
+LoadingIcon.Size = UDim2.new(0, 50, 0, 50)
+LoadingIcon.Font = Enum.Font.GothamBlack
+LoadingIcon.Text = "👑"
+LoadingIcon.TextColor3 = GoldColor
+LoadingIcon.TextSize = 40
+LoadingIcon.TextScaled = true
+
+-- Title
+TitleLabel.Parent = MainFrame
+TitleLabel.BackgroundTransparency = 1
+TitleLabel.Position = UDim2.new(0, 0, 0, 78)
+TitleLabel.Size = UDim2.new(1, 0, 0, 35)
+TitleLabel.Font = Enum.Font.GothamBlack
+TitleLabel.Text = "SAB KING LOADER V2"
+TitleLabel.TextColor3 = GoldColor
+TitleLabel.TextSize = 24
+TitleLabel.TextScaled = true
+
+-- Subtitle
+SubTitleLabel.Parent = MainFrame
+SubTitleLabel.BackgroundTransparency = 1
+SubTitleLabel.Position = UDim2.new(0, 0, 0, 112)
+SubTitleLabel.Size = UDim2.new(1, 0, 0, 18)
+SubTitleLabel.Font = Enum.Font.GothamMedium
+SubTitleLabel.Text = "by SAB KING Team"
+SubTitleLabel.TextColor3 = Color3.fromRGB(180, 180, 200)
+SubTitleLabel.TextSize = 13
+
+-- Status Label
+StatusLabel.Parent = MainFrame
+StatusLabel.BackgroundTransparency = 1
+StatusLabel.Position = UDim2.new(0, 0, 0, 145)
+StatusLabel.Size = UDim2.new(1, 0, 0, 20)
+StatusLabel.Font = Enum.Font.GothamSemibold
+StatusLabel.Text = "Loading Fluent Library..."
+StatusLabel.TextColor3 = Color3.fromRGB(200, 200, 220)
+StatusLabel.TextSize = 13
+
+-- Percentage Label
+PercentageLabel.Parent = MainFrame
+PercentageLabel.BackgroundTransparency = 1
+PercentageLabel.Position = UDim2.new(1, -45, 0, 170)
+PercentageLabel.Size = UDim2.new(0, 40, 0, 20)
+PercentageLabel.Font = Enum.Font.GothamBold
+PercentageLabel.Text = "0%"
+PercentageLabel.TextColor3 = GoldColor
+PercentageLabel.TextSize = 13
+
+-- Progress Bar Background
+BarBackground.Parent = MainFrame
+BarBackground.BackgroundColor3 = Color3.fromRGB(30, 30, 45)
+BarBackground.Position = UDim2.new(0.08, 0, 0, 175)
+BarBackground.Size = UDim2.new(0.84, 0, 0, 8)
+
+BarBackgroundCorner.CornerRadius = UDim.new(0, 4)
+BarBackgroundCorner.Parent = BarBackground
+
+-- Progress Bar Fill
+ProgressBar.Parent = BarBackground
+ProgressBar.BackgroundColor3 = GoldColor
+ProgressBar.Size = UDim2.new(0, 0, 1, 0)
+
+ProgressBarCorner.CornerRadius = UDim.new(0, 4)
+ProgressBarCorner.Parent = ProgressBar
+
+-- Progress Glow Effect
+ProgressGlow.Parent = BarBackground
+ProgressGlow.BackgroundColor3 = GoldColor
+ProgressGlow.BackgroundTransparency = 0.5
+ProgressGlow.Size = UDim2.new(0, 0, 1, 0)
+ProgressGlow.Position = UDim2.new(0, 0, 0, 0)
+ProgressGlow.Visible = false
+
+-- Animasi Icon Berputar
+task.spawn(function()
+    local rotation = 0
+    while LoadingIcon.Parent do
+        rotation = (rotation + 3) % 360
+        LoadingIcon.Rotation = rotation
+        task.wait(0.02)
+    end
+end)
+
+local function updateProgress(text, progress, percentage)
+    StatusLabel.Text = text
+    if percentage then
+        PercentageLabel.Text = percentage
+    else
+        PercentageLabel.Text = math.floor(progress * 100) .. "%"
+    end
+    
+    TweenService:Create(ProgressBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+        Size = UDim2.new(progress, 0, 1, 0)
+    }):Play()
+    
+    -- Glow Effect
+    ProgressGlow.Visible = progress > 0.1
+    TweenService:Create(ProgressGlow, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+        Size = UDim2.new(progress + 0.02, 0, 1, 0)
+    }):Play()
+end
+
+-- Animasi Border Berkedip
+task.spawn(function()
+    while BorderStroke.Parent do
+        for i = 1, 2 do
+            TweenService:Create(BorderStroke, TweenInfo.new(1.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+                Transparency = 0.1
+            }):Play()
+            task.wait(1.5)
+            TweenService:Create(BorderStroke, TweenInfo.new(1.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
+                Transparency = 0.4
+            }):Play()
+            task.wait(1.5)
+        end
+    end
+end)
+
+-- Jika Fluent gagal loading, gunakan alternatif
+if not Fluent then
+    updateProgress("Loading Rayfield as alternative...", 0.5, "50%")
+    task.wait(0.5)
+    
+    local success, result = pcall(function()
+        return loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+    end)
+    
+    if success and result then
+        updateProgress("Rayfield loaded! Creating UI...", 0.85, "85%")
+        task.wait(0.3)
+        
+        local Rayfield = result
+        local Window = Rayfield:CreateWindow({
+            Name = "SAB KING LOADER V2",
+            LoadingTitle = "Loading...",
+            LoadingSubtitle = "SAB KING Loader",
+            ConfigurationSaving = {Enabled = false}
+        })
+        
+        updateProgress("Done!", 1.0, "100%")
+        task.wait(0.5)
+        LoadingGui:Destroy()
+        
+        -- Buat Tab dengan Rayfield
+        local Tab1 = Window:CreateTab("Steal & Speed", 4483362458)
+        Tab1:CreateSection("Speed & Teleport Features")
+        
+        local StealSpeed_Scripts = {
+            ["Auto Carry Speed"] = "https://pastebin.com/raw/EV3JZHtZ",
+            ["Auto Steal + zeus gear"] = "https://pastebin.com/raw/Vt4QzvSX",
+            ["Kanye Flash TP"] = "https://pastebin.com/raw/aG1ZZJau",
+            ["FlashTP ice hub"] = "https://pastebin.com/raw/40vnSnnV",
+            ["Nova FlashTP"] = "https://pastebin.com/raw/VmJEpDz1"
+        }
+        
+        for name, url in pairs(StealSpeed_Scripts) do
+            Tab1:CreateButton({
+                Name = name,
+                Callback = function()
+                    loadstring(game:HttpGet(url))()
+                end
+            })
+        end
+        
+        local Tab2 = Window:CreateTab("Combat & Defense", 4483362458)
+        Tab2:CreateSection("Combat & Protection Features")
+        
+        local Combat_Scripts = {
+            ["Heroz Undetect Full Features"] = "https://raw.githubusercontent.com/projectRverse/heroz/refs/heads/main/herozsb",
+            ["Anti Bat"] = "https://pastebin.com/raw/a7zM4eAC",
+            ["Worked Anti Ragdoll v1"] = "https://pastebin.com/raw/0bKbxNMv",
+            ["Anti Die"] = "https://pastebin.com/raw/ZpNE636e",
+            ["Insta Reset"] = "https://pastebin.com/raw/tkUY2HJm"
+        }
+        
+        for name, url in pairs(Combat_Scripts) do
+            Tab2:CreateButton({
+                Name = name,
+                Callback = function()
+                    loadstring(game:HttpGet(url))()
+                end
+            })
+        end
+        
+        local Tab3 = Window:CreateTab("Farming & Event", 4483362458)
+        Tab3:CreateSection("Automation & Event Features")
+        
+        local Farm_Scripts = {
+            ["Auto collect Honey (event)"] = "https://pastebin.com/raw/XUtWqmCf",
+            ["Auto Buy Bee Shop sniper (event)"] = "https://pastefy.app/FLOSk/raw",
+            ["Auto RNG machine WORKED"] = "https://pastebin.com/raw/p5bFA5EY",
+            ["Brainrot Spawner V1"] = "https://raw.githubusercontent.com/projectRverse/spwn/refs/heads/main/newspnwr",
+            ["Auto Buy Carpet"] = "https://pastebin.com/raw/1vMhQL0U",
+            ["Auto Grab V1"] = "https://pastebin.com/raw/Ncrn0NWs",
+            ["404 Auto Grab"] = "https://pastebin.com/raw/b6sir6sE"
+        }
+        
+        for name, url in pairs(Farm_Scripts) do
+            Tab3:CreateButton({
+                Name = name,
+                Callback = function()
+                    loadstring(game:HttpGet(url))()
+                end
+            })
+        end
+        
+        local Tab4 = Window:CreateTab("Code & Redeem", 4483362458)
+        Tab4:CreateSection("Auto Code & Gift Redeemer")
+        
+        local CodeRedeem_Scripts = {
+            ["AMIR Auto code redeemer"] = "https://pastebin.com/raw/CsJFXnFp",
+            ["360 Auto redeem code"] = "https://pastebin.com/raw/aSRY18JU",
+            ["SpyderHub Auto Gift Code"] = "https://pastebin.com/raw/6DJnLV4H",
+            ["Gift Code Snipe v1"] = "https://pastebin.com/raw/h15sLLSX",
+            ["NEW Auto code Redemer"] = "https://pastebin.com/raw/h6v8HZaj",
+            ["Spook Auto code+ridle"] = "https://pastebin.com/raw/ApTSssC1",
+            ["Auto code redeemer v2"] = "https://pastebin.com/raw/6EvwKti5"
+        }
+        
+        for name, url in pairs(CodeRedeem_Scripts) do
+            Tab4:CreateButton({
+                Name = name,
+                Callback = function()
+                    loadstring(game:HttpGet(url))()
+                end
+            })
+        end
+        
+        local Tab5 = Window:CreateTab("Best Duel", 4483362458)
+        Tab5:CreateSection("Duel Scripts Collection")
+        
+        local Duel_Scripts = {
+            ["Larph Duel"] = "https://pastebin.com/raw/138HBiRK",
+            ["Cryon Duel"] = "https://pastebin.com/raw/tZZk3wS7",
+            ["Nail Hub Duel"] = "https://pastebin.com/raw/pMG73qbd",
+            ["Five Duel"] = "https://pastebin.com/raw/cU3A8ERS",
+            ["Crux Duel v3"] = "https://pastebin.com/raw/prDEZHJh",
+            ["Crux Duel for Mobile"] = "https://pastebin.com/raw/nYuNj0MJ",
+            ["Moon Duel"] = "https://pastebin.com/raw/pM6aVJHJ",
+            ["OR.s Duel"] = "https://pastebin.com/raw/wgqE3MiN"
+        }
+        
+        for name, url in pairs(Duel_Scripts) do
+            Tab5:CreateButton({
+                Name = name,
+                Callback = function()
+                    loadstring(game:HttpGet(url))()
+                end
+            })
+        end
+        
+        local Tab6 = Window:CreateTab("Utility & Misc", 4483362458)
+        Tab6:CreateSection("System & Utility Tools")
+        
+        local Utility_Scripts = {
+            ["Chilin Auto Joiner"] = "https://pastebin.com/raw/Qv19kXGt",
+            ["Best ALL hub"] = "https://pastebin.com/raw/90A03L8y",
+            ["Anti Admin Panel"] = "https://pastebin.com/raw/kwucBwdW",
+            ["FPS Booster"] = "https://pastebin.com/raw/Ng8mCw8A",
+            ["Fast Kick Rejoin"] = "https://pastebin.com/raw/xnPAfz2M",
+            ["Empty Map Finder"] = "https://pastebin.com/raw/1CeeY67A",
+            ["Irish Hub V1.1"] = "https://pastebin.com/raw/HW6U98FR",
+            ["Galaxy Ping Lagger"] = "https://pastebin.com/raw/crG7QHYF",
+            ["ViolanceHub.CC"] = "https://pastebin.com/raw/c3U9pqfn"
+        }
+        
+        for name, url in pairs(Utility_Scripts) do
+            Tab6:CreateButton({
+                Name = name,
+                Callback = function()
+                    loadstring(game:HttpGet(url))()
+                end
+            })
+        end
+        
+        local Tab7 = Window:CreateTab("Discord", 4483362458)
+        Tab7:CreateSection("Community")
+        Tab7:CreateButton({
+            Name = "Join Discord",
+            Callback = function()
+                setclipboard("https://discord.gg/ZyYgAvy9J")
+            end
+        })
+        
+        return
+    else
+        updateProgress("Error: Failed to load UI library!", 1.0, "ERROR")
+        task.wait(2)
+        LoadingGui:Destroy()
+        return
+    end
+end
+
+-- Lanjut dengan Fluent jika berhasil loading
+updateProgress("Fluent loaded! Creating UI...", 0.7, "70%")
+task.wait(0.3)
+
+----------------------------------------------------------------------
+-- 2. Create Main Window & Categorized Tabs
+----------------------------------------------------------------------
 local Window = Fluent:CreateWindow({
     Title = "SAB KING LOADER V2 NEW",
     SubTitle = "by SAB KING Team",
-    TabWidth = 150,
-    Size = UDim2.fromOffset(540, 380),
+    TabWidth = 160,
+    Size = UDim2.fromOffset(560, 400),
     Theme = "Dark",
     MinimizeKey = Enum.KeyCode.LeftControl
 })
 
--- 3. Create Tabs
+updateProgress("UI Ready!", 1.0, "100%")
+task.wait(0.3)
+LoadingGui:Destroy()
+
 local Tabs = {
-    SAB = Window:AddTab({ Title = "BEST KING SAB", Icon = "flame" }),
-    Duel = Window:AddTab({ Title = "BEST DUEL", Icon = "swords" }),
-    Misc = Window:AddTab({ Title = "MISC", Icon = "box" }),
-    Settings = Window:AddTab({ Title = "Settings & Community", Icon = "settings" })
+    StealSpeed = Window:AddTab({ Title = "Steal & Speed", Icon = "flame" }),
+    Combat = Window:AddTab({ Title = "Combat & Defense", Icon = "swords" }),
+    Farm = Window:AddTab({ Title = "Farming & Event", Icon = "coins" }),
+    CodeRedeem = Window:AddTab({ Title = "Code & Redeem", Icon = "gift" }),
+    Duel = Window:AddTab({ Title = "Best Duel", Icon = "trophy" }),
+    Utility = Window:AddTab({ Title = "Utility & Misc", Icon = "wrench" }),
+    Settings = Window:AddTab({ Title = "Settings & Discord", Icon = "settings" })
 }
 
 ----------------------------------------------------------------------
@@ -29,7 +444,7 @@ local ToggleButton = Instance.new("TextButton")
 local UICorner = Instance.new("UICorner")
 
 ScreenGui.Name = "SABKingToggleGui"
-ScreenGui.Parent = (game:GetService("CoreGui"):FindFirstChild("RobloxGui") or game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
+ScreenGui.Parent = (CoreGui:FindFirstChild("RobloxGui") or player:WaitForChild("PlayerGui"))
 ScreenGui.ResetOnSpawn = false
 
 ToggleButton.Name = "ToggleButton"
@@ -37,9 +452,9 @@ ToggleButton.Parent = ScreenGui
 ToggleButton.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
 ToggleButton.Position = UDim2.new(0.05, 0, 0.2, 0)
 ToggleButton.Size = UDim2.new(0, 50, 0, 50)
-ToggleButton.Font = Enum.Font.SourceSansBold
+ToggleButton.Font = Enum.Font.GothamBlack
 ToggleButton.Text = "K"
-ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToggleButton.TextColor3 = GoldColor
 ToggleButton.TextSize = 28
 ToggleButton.Active = true
 ToggleButton.Draggable = true
@@ -47,89 +462,118 @@ ToggleButton.Draggable = true
 UICorner.CornerRadius = UDim.new(0.5, 0)
 UICorner.Parent = ToggleButton
 
--- Toggle UI visibility when clicking the "K" button
+local ToggleStroke = Instance.new("UIStroke")
+ToggleStroke.Color = GoldColor
+ToggleStroke.Thickness = 1.5
+ToggleStroke.Transparency = 0.5
+ToggleStroke.Parent = ToggleButton
+
 ToggleButton.MouseButton1Click:Connect(function()
     if Window then
         Window:Minimize()
     end
 end)
 
-----------------------------------------------------------------------
--- TAB 1: BEST KING SAB SCRIPT
-----------------------------------------------------------------------
-Tabs.SAB:AddSection("Script List")
+-- Helper Function untuk membuat Dropdown & Tombol Eksekusi
+local function CreateScriptDropdown(tab, sectionTitle, scriptMap, dropdownTitle)
+    tab:AddSection(sectionTitle)
+    
+    local nameList = {}
+    for name, _ in pairs(scriptMap) do
+        table.insert(nameList, name)
+    end
+    table.sort(nameList)
+    
+    local selectedScript = nameList[1]
+    
+    local dropdown = tab:AddDropdown(dropdownTitle .. "_Dropdown", {
+        Title = dropdownTitle,
+        Values = nameList,
+        Multi = false,
+        Default = 1,
+    })
+    
+    dropdown:OnChanged(function(Value)
+        selectedScript = Value
+    end)
+    
+    tab:AddButton({
+        Title = "Execute Selected Script",
+        Description = "Jalankan script yang dipilih pada dropdown di atas",
+        Callback = function()
+            if scriptMap[selectedScript] then
+                Fluent:Notify({
+                    Title = "SAB KING Loader",
+                    Content = "Executing: " .. selectedScript,
+                    Duration = 3
+                })
+                task.spawn(function()
+                    loadstring(game:HttpGet(scriptMap[selectedScript]))()
+                end)
+            end
+        end
+    })
+end
 
-local SAB_Scripts = {
-    ["Auto RNG machine beta"] = "https://pastebin.com/raw/vjAwx1jd",
-    ["Chilin Auto Joiner"] = "https://pastebin.com/raw/Qv19kXGt",
-    ["Best ALL hub"] = "https://pastebin.com/raw/90A03L8y",
-    ["Gamma Auto Gift Code"] = "https://pastebin.com/raw/6DJnLV4H",
-    ["Gift Code Snipe v1"] = "https://pastebin.com/raw/h15sLLSX",
-    ["NEW Auto code Redemer"] = "https://pastebin.com/raw/h6v8HZaj",
-    ["Gift Code Snipe v2"] = "https://pastebin.com/raw/2NzxTMZU",
-    ["Amir hub Gift Code Snipe"] = "https://pastebin.com/raw/Am0pxziv",
-    ["Anti Admin Panel"] = "https://pastebin.com/raw/kwucBwdW",
-    ["FPS Booster"] = "https://pastebin.com/raw/Ng8mCw8A",
-    ["Anti Bat"] = "https://pastebin.com/raw/a7zM4eAC",
-    ["Fast Kick Rejoin"] = "https://pastebin.com/raw/xnPAfz2M",
-    ["Worked Anti Ragdoll v1"] = "https://pastebin.com/raw/0bKbxNMv",
-    ["Anti Die"] = "https://pastebin.com/raw/ZpNE636e",
+----------------------------------------------------------------------
+-- TAB 1: STEAL & SPEED
+----------------------------------------------------------------------
+local StealSpeed_Scripts = {
     ["Auto Carry Speed"] = "https://pastebin.com/raw/EV3JZHtZ",
-    ["Empty Map Finder"] = "https://pastebin.com/raw/1CeeY67A",
-    ["Irish Hub V1.1"] = "https://pastebin.com/raw/HW6U98FR",
-    ["Galaxy Ping Lagger"] = "https://pastebin.com/raw/crG7QHYF",
-    ["ViolanceHub.CC"] = "https://pastebin.com/raw/c3U9pqfn",
-    ["Auto Buy Carpet"] = "https://pastebin.com/raw/1vMhQL0U",
-    ["Auto Grab V1"] = "https://pastebin.com/raw/Ncrn0NWs",
     ["Auto Steal + zeus gear"] = "https://pastebin.com/raw/Vt4QzvSX",
     ["Kanye Flash TP"] = "https://pastebin.com/raw/aG1ZZJau",
     ["FlashTP ice hub"] = "https://pastebin.com/raw/40vnSnnV",
-    ["Nova FlashTP"] = "https://pastebin.com/raw/VmJEpDz1",
-    ["Insta Reset"] = "https://pastebin.com/raw/tkUY2HJm",
+    ["Nova FlashTP"] = "https://pastebin.com/raw/VmJEpDz1"
+}
+
+CreateScriptDropdown(Tabs.StealSpeed, "Speed & Teleport Features", StealSpeed_Scripts, "Select Movement Script")
+
+----------------------------------------------------------------------
+-- TAB 2: COMBAT & DEFENSE
+----------------------------------------------------------------------
+local Combat_Scripts = {
+    ["Heroz Undetect Full Features"] = "https://raw.githubusercontent.com/projectRverse/heroz/refs/heads/main/herozsb",
+    ["Anti Bat"] = "https://pastebin.com/raw/a7zM4eAC",
+    ["Worked Anti Ragdoll v1"] = "https://pastebin.com/raw/0bKbxNMv",
+    ["Anti Die"] = "https://pastebin.com/raw/ZpNE636e",
+    ["Insta Reset"] = "https://pastebin.com/raw/tkUY2HJm"
+}
+
+CreateScriptDropdown(Tabs.Combat, "Combat & Protection Features", Combat_Scripts, "Select Combat Script")
+
+----------------------------------------------------------------------
+-- TAB 3: FARMING & EVENT
+----------------------------------------------------------------------
+local Farm_Scripts = {
+    ["Auto collect Honey (event)"] = "https://pastebin.com/raw/XUtWqmCf",
+    ["Auto Buy Bee Shop sniper (event)"] = "https://pastefy.app/FLOSk/raw",
+    ["Auto RNG machine WORKED"] = "https://pastebin.com/raw/p5bFA5EY",
+    ["Brainrot Spawner V1"] = "https://raw.githubusercontent.com/projectRverse/spwn/refs/heads/main/newspnwr",
+    ["Auto Buy Carpet"] = "https://pastebin.com/raw/1vMhQL0U",
+    ["Auto Grab V1"] = "https://pastebin.com/raw/Ncrn0NWs",
     ["404 Auto Grab"] = "https://pastebin.com/raw/b6sir6sE"
 }
 
-local SAB_List = {}
-for name, _ in pairs(SAB_Scripts) do
-    table.insert(SAB_List, name)
-end
-table.sort(SAB_List)
-
-local SelectedSAB = SAB_List[1]
-
-local SABDropdown = Tabs.SAB:AddDropdown("SABSelector", {
-    Title = "Select SAB Script",
-    Values = SAB_List,
-    Multi = false,
-    Default = 1,
-})
-
-SABDropdown:OnChanged(function(Value)
-    SelectedSAB = Value
-end)
-
-Tabs.SAB:AddButton({
-    Title = "Execute Selected SAB Script",
-    Description = "Run the chosen SAB script from the dropdown above",
-    Callback = function()
-        if SAB_Scripts[SelectedSAB] then
-            Fluent:Notify({
-                Title = "SAB Loader",
-                Content = "Executing: " .. SelectedSAB,
-                Duration = 3
-            })
-            task.spawn(function()
-                loadstring(game:HttpGet(SAB_Scripts[SelectedSAB]))()
-            end)
-        end
-    end
-})
+CreateScriptDropdown(Tabs.Farm, "Automation & Event Features", Farm_Scripts, "Select Farm Script")
 
 ----------------------------------------------------------------------
--- TAB 2: BEST DUEL SCRIPT
+-- TAB 4: CODE & REDEEM
 ----------------------------------------------------------------------
-Tabs.Duel:AddSection("Script List")
+local CodeRedeem_Scripts = {
+    ["AMIR Auto code redeemer"] = "https://pastebin.com/raw/CsJFXnFp",
+    ["360 Auto redeem code"] = "https://pastebin.com/raw/aSRY18JU",
+    ["SpyderHub Auto Gift Code"] = "https://pastebin.com/raw/6DJnLV4H",
+    ["Gift Code Snipe v1"] = "https://pastebin.com/raw/h15sLLSX",
+    ["NEW Auto code Redemer"] = "https://pastebin.com/raw/h6v8HZaj",
+    ["Spook Auto code+ridle"] = "https://pastebin.com/raw/ApTSssC1",
+    ["Auto code redeemer v2"] = "https://pastebin.com/raw/6EvwKti5"
+}
 
+CreateScriptDropdown(Tabs.CodeRedeem, "Auto Code & Gift Redeemer", CodeRedeem_Scripts, "Select Redeem Script")
+
+----------------------------------------------------------------------
+-- TAB 5: BEST DUEL
+----------------------------------------------------------------------
 local Duel_Scripts = {
     ["Larph Duel"] = "https://pastebin.com/raw/138HBiRK",
     ["Cryon Duel"] = "https://pastebin.com/raw/tZZk3wS7",
@@ -141,54 +585,34 @@ local Duel_Scripts = {
     ["OR.s Duel"] = "https://pastebin.com/raw/wgqE3MiN"
 }
 
-local Duel_List = {}
-for name, _ in pairs(Duel_Scripts) do
-    table.insert(Duel_List, name)
-end
-table.sort(Duel_List)
-
-local SelectedDuel = Duel_List[1]
-
-local DuelDropdown = Tabs.Duel:AddDropdown("DuelSelector", {
-    Title = "Select Duel Script",
-    Values = Duel_List,
-    Multi = false,
-    Default = 1,
-})
-
-DuelDropdown:OnChanged(function(Value)
-    SelectedDuel = Value
-end)
-
-Tabs.Duel:AddButton({
-    Title = "Execute Selected Duel Script",
-    Description = "Run the chosen Duel script from the dropdown above",
-    Callback = function()
-        if Duel_Scripts[SelectedDuel] then
-            Fluent:Notify({
-                Title = "Duel Loader",
-                Content = "Executing: " .. SelectedDuel,
-                Duration = 3
-            })
-            task.spawn(function()
-                loadstring(game:HttpGet(Duel_Scripts[SelectedDuel]))()
-            end)
-        end
-    end
-})
+CreateScriptDropdown(Tabs.Duel, "Duel Scripts Collection", Duel_Scripts, "Select Duel Script")
 
 ----------------------------------------------------------------------
--- TAB 3: MISC SCRIPT
+-- TAB 6: UTILITY & MISC
 ----------------------------------------------------------------------
-Tabs.Misc:AddSection("Script List")
+local Utility_Scripts = {
+    ["Chilin Auto Joiner"] = "https://pastebin.com/raw/Qv19kXGt",
+    ["Best ALL hub"] = "https://pastebin.com/raw/90A03L8y",
+    ["Anti Admin Panel"] = "https://pastebin.com/raw/kwucBwdW",
+    ["FPS Booster"] = "https://pastebin.com/raw/Ng8mCw8A",
+    ["Fast Kick Rejoin"] = "https://pastebin.com/raw/xnPAfz2M",
+    ["Empty Map Finder"] = "https://pastebin.com/raw/1CeeY67A",
+    ["Irish Hub V1.1"] = "https://pastebin.com/raw/HW6U98FR",
+    ["Galaxy Ping Lagger"] = "https://pastebin.com/raw/crG7QHYF",
+    ["ViolanceHub.CC"] = "https://pastebin.com/raw/c3U9pqfn"
+}
 
-Tabs.Misc:AddButton({
+CreateScriptDropdown(Tabs.Utility, "System & Utility Tools", Utility_Scripts, "Select Utility Script")
+
+Tabs.Utility:AddSection("Extra Loaders")
+
+Tabs.Utility:AddButton({
     Title = "1. Best UGC Emote + Animation",
     Description = "Execute Emote & Animation GUI",
     Callback = function()
         Fluent:Notify({
             Title = "Misc Loader",
-            Content = "Executing Emotes Script...",
+            Content = "Executing Emotes...",
             Duration = 3
         })
         task.spawn(function()
@@ -197,7 +621,7 @@ Tabs.Misc:AddButton({
     end
 })
 
-Tabs.Misc:AddButton({
+Tabs.Utility:AddButton({
     Title = "2. M7 ADMIN Script",
     Description = "Execute M7 Admin Loader",
     Callback = function()
@@ -213,9 +637,9 @@ Tabs.Misc:AddButton({
 })
 
 ----------------------------------------------------------------------
--- TAB 4: SETTINGS & COMMUNITY DISCORD
+-- TAB 7: SETTINGS & COMMUNITY DISCORD
 ----------------------------------------------------------------------
-local DiscordLink = "https://discord.gg/ehfk7SdSTk"
+local DiscordLink = "https://discord.gg/ZyYgAvy9J"
 
 Tabs.Settings:AddSection("Community")
 
@@ -232,35 +656,36 @@ Tabs.Settings:AddButton({
             setclipboard(DiscordLink)
             Fluent:Notify({
                 Title = "Discord Link",
-                Content = "Discord invite link copied to clipboard!",
+                Content = "Copied to clipboard!",
                 Duration = 3
             })
         else
             Fluent:Notify({
                 Title = "Error",
-                Content = "Your executor does not support clipboard copying.",
+                Content = "Clipboard not supported.",
                 Duration = 3
             })
         end
     end
 })
 
--- UI Library Config & Settings Manager
-SaveManager:SetLibrary(Fluent)
-InterfaceManager:SetLibrary(Fluent)
-SaveManager:IgnoreThemeSettings()
-SaveManager:SetIgnoreIndexes({})
-
-InterfaceManager:BuildInterfaceSection(Tabs.Settings)
-SaveManager:BuildConfigSection(Tabs.Settings)
+if SaveManager and InterfaceManager then
+    SaveManager:SetLibrary(Fluent)
+    InterfaceManager:SetLibrary(Fluent)
+    SaveManager:IgnoreThemeSettings()
+    SaveManager:SetIgnoreIndexes({})
+    InterfaceManager:BuildInterfaceSection(Tabs.Settings)
+    SaveManager:BuildConfigSection(Tabs.Settings)
+end
 
 Window:SelectTab(1)
 
--- Welcome Notification
 Fluent:Notify({
     Title = "SAB KING LOADER V2 NEW",
-    Content = "Loader loaded successfully! Click the 'K' button to open/close menu.",
+    Content = "Loader ready! Click 'K' button to toggle UI.",
     Duration = 5
 })
 
-SaveManager:LoadAutoloadConfig()
+if SaveManager then
+    SaveManager:LoadAutoloadConfig()
+end
